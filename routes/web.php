@@ -17,3 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::resource('test',App\Http\Controllers\testController::class);
+
+Route::resource('upload',App\Http\Controllers\UploadImageController::class);

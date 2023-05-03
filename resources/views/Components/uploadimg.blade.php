@@ -5,9 +5,11 @@
         <input type="file" name="{{$name}}" id='image' class="form-control" {{$multiple=="true" ? 'multiple' : ''}}>
         <!-- Size Image With MB -->
         <p><label for="image" class="form-label">Size Image : <span id="size"></span></label></p>
+        <p><label for="image" class="form-label">PPi : <span id="dimintion"></span></label></p>
         <p><label for="image" class="form-label">Size Max : <span id="max_size">{{$limit}} </span> MB</label></p>
+
     </div>
-    <img src="" alt="" id="preview" width="120px" height="120px">
+    <img src="" data-width="" data-height="" alt="" id="preview" width="120px" height="120px">
 </div>
 
 
@@ -22,15 +24,21 @@
         let path = (window.URL || window.webkitURL).createObjectURL(files[0]);
         let sizeImage = Math.round(parseInt(files[0]["size"]) / 1024);
 
-        if (parseInt(sizeImage)>parseInt(max_size)){
+
+        if (parseInt(sizeImage) > parseInt(max_size)) {
             alert('The Image Size Max then Limit')
-            path=""
-            files=[]
-            sizeImage=""
+            path = ""
+            files = []
+            sizeImage = ""
+
             preview.setAttribute('src', '')
         }
-        preview.setAttribute('src', path)
-        size.innerHTML = sizeImage
-
+        // Get Resloation
+        var img = new Image();
+        img.onload = function() { dimintion.innerHTML=this.width + '×'+this.height};
+        img.src = path;
+        //-------------------------
+        preview.setAttribute('src', path);
+        size.innerHTML = sizeImage 
     });
 </script>

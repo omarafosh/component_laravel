@@ -1,0 +1,31 @@
+.cardupload{
+    border:1px solid #7a7a7a;
+    width:300px;
+    height: 100px;
+}
+#container-uploader{
+    background-color: black;
+    height: 75px;
+    width: 75px;
+}
+#header-upload{
+    height: 25px;
+    background-color: #969494;
+}
+#image-upload {
+width: 100%;
+}
+
+#body-upload{
+    display: flex;
+    align-items: center;
+    max-height: 100px;
+    background-color: #7a7a7a;
+}
+
+#info-upload{
+    line-height: 0.5;
+}
+#element-upload{
+    padding: 1px;
+}
