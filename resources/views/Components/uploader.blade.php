@@ -1,14 +1,15 @@
 <div class="wrapper">
     <div class="button">
-        <input type="file" id="photo" name="photo[]" multiple accept="image/png, image/jpeg">
-        <span>Upload</span>
+ 
+        <input type="file" id="{{$name}}" name="{{$name}}[]"  multiple>
+
+
+        <span>Select Images</span>
         <span class="file-count"></span>
     </div>
     <div class="file-content">
-        <div class="preview">
-        </div>
+        <div class="preview"></div>
     </div>
-
 </div>
 
 
@@ -16,8 +17,9 @@
     let photos = document.querySelector('input[type=file]');
     let preview = document.querySelector('.preview');
     let delete_file = document.querySelector('.file-delete');
-    let file_count=document.querySelector('.file-count');
+    let file_count = document.querySelector('.file-count');
 
+    // Function To Get Alias File
     const aliasName = (filename, length_filename = 6) => {
         if (filename.length >= length_filename) {
             splitName = filename.split('.');
@@ -25,6 +27,8 @@
         }
         return filename
     }
+
+    // Function To Get Size File
     const fileSize = (size) => {
         let firstSize = Math.floor(size / 1024);
         if (firstSize < 1024) {
@@ -32,36 +36,39 @@
         }
         return (firstSize / 1024).toFixed(2) + " MB";
     }
-  
+
     if (delete_file) {
         delete_file.addEventListener('click', deleteFile);
         console.log(delete_file);
     }
+
     function deleteFile(target) {
         console.log();
     }
 
+    // Display Thumbnil where is Select Photo
     photos.addEventListener('change', uploadImage);
+
     function uploadImage() {
-        file_count.innerHTML+=1;
+        file_count.innerHTML += 1;
         for (let i = 0; i < photos.files.length; i++) {
             let file = photos.files[i]
             let fileName = file.name
             let shortName = aliasName(fileName);
             let fileSizes = fileSize(file.size);
-               console.log(window.URL || window.webkitURL)
+            // Get Path Photo Before Uploaded
             let path = (window.URL || window.webkitURL).createObjectURL(file);
+            // Card To Display Photo 
             let progressHTML = `<li class="element">
-
-                            <img class="file-type" src=${path}>
-                            <div class="details">
+                                <img class="file-type" src=${path}>
+                                <div class="details">
                                     <span class="name">${shortName}</span>
                                     <span class="percent">${fileSizes}</span>
                                 </div>
-                            <div class="percentg">
-                            <span class="file-delete">X</span>
-                              <span>&&</span>
-                            </div>
+                                <div class="percentg">
+                                    <span class="file-delete">X</span>
+                                    <span>&&</span>
+                                </div>
                             </li>
                             <hr>`;
             preview.insertAdjacentHTML("afterbegin", progressHTML);
@@ -71,6 +78,14 @@
     }
 </script>
 <style>
+    * {
+        --button-color: #677889;
+        --button-height: 230px;
+        --card-color: #908009;
+        --size-image: 75px;
+        --preview-height: 230px;
+    }
+
     .wrapper {
         background-color: #F4EEE0;
         width: 230px;
@@ -81,6 +96,14 @@
         justify-content: center;
         align-items: center;
         min-height: 100px;
+        border: 1px dashed;
+    }
+
+    .file-content {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        height: var(--preview-height);
         border: 1px dashed;
     }
 
@@ -115,12 +138,7 @@
         flex-direction: column;
     }
 
-    .file-content {
-        display: flex;
-        flex-direction: column;
-        overflow-y: scroll;
-        max-height: 186px;
-    }
+
 
     .percentg {
         display: flex;

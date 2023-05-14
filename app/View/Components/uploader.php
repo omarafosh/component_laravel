@@ -6,16 +6,16 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class uploaderimg extends Component
+class uploader extends Component
 {
     /**
      * Create a new component instance.
      */
-
-    public function __construct()
-    {
+    public $name;
 
 
+    public function __construct($name) {
+        $this->name = $name;
     }
 
     /**
@@ -23,6 +23,6 @@ class uploaderimg extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.uploaderimg');
+        return view('components.uploader');
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\UploadImage;
-use App\View\Components\uploadImage as ComponentsUploadImage;
+
+
 use Illuminate\Http\Request;
 
 class UploadImageController extends Controller

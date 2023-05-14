@@ -16,9 +16,7 @@
 </head>
 
 <body>
-    <form action="{{route('upload.store')}}" method="post">
-        <x-uploaderimg />
-    </form>
+    <x-filter-products name="product" />
 </body>
 
 </html>
