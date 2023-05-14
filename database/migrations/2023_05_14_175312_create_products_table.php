@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('total');
             $table->foreignId('category_id')->on('categories')->delete('cascad');
             $table->foreignId('user_id')->on('users')->delete('cascad');
+            $table->foreignId('attribute_id')->on('attributs')->delete('cascad');
             $table->timestamps();
         });
     }

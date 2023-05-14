@@ -4,11 +4,15 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Category;
+use App\models\Attribute;
+use App\models\User;
+use Nette\Utils\Random;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class CategoryFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +21,23 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $attributs=Attribute::all();
+        $categorys=Category::all();
+        $users=User::all();
+        $max_att=max($attributs->id);
+        $max_cat=max($categorys->id);
+        $max_user=max($users->id);
         return [
+            'category_id'=>random_int(1,$max_cat) ,
+            'attribut_id'=>random_int(1,$max_att) ,
+            'user_id'=>random_int(1,$max_user) ,
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'description' => fake()->paragraph(),
+            'evaluation' => fake()->STR::random_int(0,5),
+            'quantity' => fake()->STR::random_int(2,9)(),
+            'price' => fake()->Str::range(1500.00,3750.00),
+            'old_price' => fake()->Str::range(1500.00,3750.00),
+            'total' => fake()->Str::range(3500.00,1000000.00),
         ];
     }
 
